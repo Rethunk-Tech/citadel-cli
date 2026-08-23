@@ -49,7 +49,7 @@ vet: ## Run go vet
 lint: golangci ## Alias for golangci
 
 golangci: ## Run golangci-lint (stricter pass than vet)
-	golangci-lint run
+	golangci-lint run --allow-parallel-runners
 
 fmt: ## Run go fmt across all packages
 	go fmt ./...
