@@ -1,6 +1,6 @@
 # citadel-cli — agent primer
 
-LLMs: read this first. `CLAUDE.md` contains `@AGENTS.md` — **edit `AGENTS.md`, never `CLAUDE.md`**. Humans: [HUMANS.md](HUMANS.md). Commits: [CONTRIBUTING.md](CONTRIBUTING.md).
+LLMs: read this first. Humans: [HUMANS.md](HUMANS.md). Commits: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Repository shape
 
