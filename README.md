@@ -14,9 +14,9 @@
 
 ---
 
-`citadel-cli` is the operator and developer interface for [Citadel](https://github.com/Rethunk-Tech/citadel). Citadel operators use it to administer namespaces, manage org members and permissions, query audit logs, and oversee the full platform lifecycle from the terminal. Developers reach for it to clone and push repositories, browse commits and blobs, manage deploy tokens and webhooks, file issues, track milestones, and interact with the Citadel Knowledge Graph — all without leaving the shell.
+`citadel-cli` is the terminal interface for [Citadel](https://github.com/Rethunk-Tech/citadel): namespaces, repos, agents, OAuth, audit, and the knowledge graph. Operators administer the platform; developers clone, push, and script against the API without leaving the shell.
 
-Beyond surface-level resource management, `citadel-cli` embeds a full MCP client, making it a first-class participant in agentic workflows. Agents and LLM-powered tools can authenticate, enumerate resources, and execute operations through the same structured command surface that humans use, with machine-readable output modes and a structured error envelope designed for reliable programmatic consumption.
+The CLI embeds an MCP client and structured error envelopes for agentic workflows — same commands humans use, with machine-readable output modes.
 
 ## Quick start
 
@@ -28,15 +28,12 @@ Install, auth, and local development: [HUMANS.md](HUMANS.md).
 
 ## Highlights
 
-- **Repository management** — clone, push, pull, commit browsing, tree/blob traversal, topics, repo insights, deploy tokens, and webhooks
-- **Namespace and org operations** — create and configure namespaces, manage org members, handle transfer requests and invitations
-- **Agent registration and token management** — register agents, issue and revoke agent tokens, manage token scopes
-- **OAuth client registry** — register and administer OAuth clients and providers
-- **Knowledge Graph traversal** — query and navigate the Citadel project graph
-- **Audit log queries** — search and stream audit events and session logs
-- **Embedded MCP client** — integrates Citadel into agentic and LLM-powered workflows as a first-class tool provider
-- **Multiple output formats** — `json`, `yaml`, `ndjson`, `csv`, and `table` for scripting and human use
-- **Shell completion** — generated completion scripts for bash, zsh, fish, and PowerShell
+- **Repo and namespace lifecycle** — clone, push, issues, deploy tokens, webhooks, org members
+- **Agents, OAuth, and tokens** — registration, scopes, provider admin
+- **Knowledge Graph** — traverse the Citadel project graph and repo insights
+- **Audit logs** — search and stream events and session logs
+- **Embedded MCP client** — first-class agentic and LLM workflow integration
+- **Scriptable output** — json, yaml, ndjson, csv, table, and shell completion
 
 ## Documentation
 

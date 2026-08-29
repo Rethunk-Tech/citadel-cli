@@ -1,52 +1,48 @@
 # citadel-cli — agent primer
 
-If you are an LLM working in this repository, read this file first. `CLAUDE.md` contains `@AGENTS.md` — **always edit `AGENTS.md`, never `CLAUDE.md`**.
-
-For human maintainer onboarding see [HUMANS.md](HUMANS.md). For commit conventions, branch policy, and contributor checklist see [CONTRIBUTING.md](CONTRIBUTING.md).
+LLMs: read this first. `CLAUDE.md` contains `@AGENTS.md` — **edit `AGENTS.md`, never `CLAUDE.md`**. Humans: [HUMANS.md](HUMANS.md). Commits: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Repository shape
 
-See [HUMANS.md § Repository layout](HUMANS.md#repository-layout) for the canonical tree. Spec lifecycle uses the `mcp__citadel-sdd__*` MCP tools (table below); release workflow fires on `v*` tags.
+```
+main.go              Cobra entry
+cmd/                 Subcommands
+internal/clicfg/     XDG config
+internal/completion/ Shell completion cache
+internal/mcpclient/  MCP HTTP client
+specs/active|parked/ SDD specs
+.github/workflows/   ci.yml, cli-release.yml
+Makefile             build / verify
+```
 
-## Working conventions
+Spec lifecycle: `mcp__citadel-sdd__*` MCP tools only (table below). Releases on `v*` tags.
 
-Generic commit / Git-MCP rules: **`~/.claude/CLAUDE.md`**. Project-specific:
+## Invariants
 
-- **Continuous commit** authorised for the duration of `citadel-cli` work. **Push is not** — it needs an explicit instruction each time, per `~/.claude/rules/workflow.md` § Push. No repo carries a standing push grant.
-- **Specs** MUST pass `mcp__citadel-sdd__spec_lint` before commit. Canonical bullet shape `- [ ]` / `- [x]`. Priority headings (`## P0` / `## P1` / `## P2`) live in `tasks.md` only.
+- Generic Git rules: `~/.claude/CLAUDE.md`. **Commit freely; push only on explicit instruction.**
+- Specs MUST pass `mcp__citadel-sdd__spec_lint` before commit. Task bullets `- [ ]` / `- [x]`; priority headings only in `tasks.md`.
+- **Never hand-edit** spec status, DTG stamps, or `tasks.md` checkboxes — use MCP tools.
 
-## Spec lifecycle — use the MCP
-
-**Hard rule: use `mcp__citadel-sdd__*` tools for all spec lifecycle operations.** Never hand-edit status fields, DTG stamps, or `tasks.md` state lines. The tools enforce lint rules, write correct frontmatter, stamp accurate DTGs, and commit with the right message style.
-
-| What you want | Tool |
+| What | Tool |
 | --- | --- |
-| Claim (DRAFT/APPROVED → IN_PROGRESS) | `spec_claim` |
-| Approve (DRAFT → APPROVED) | `spec_approve` |
-| Close (IN_PROGRESS → DONE) | `spec_close` |
+| Claim | `spec_claim` |
+| Approve | `spec_approve` |
+| Close | `spec_close` |
 | Block / unblock | `spec_block` / `spec_unblock` |
-| Reopen (DONE → IN_PROGRESS) | `spec_reopen` |
-| Hand off owner | `spec_handoff` |
-| Check / uncheck task | `spec_task_check` |
-| Add task item | `spec_task_add` |
-| Lint (strict, cross-cutting) | `spec_lint` |
-| List by state | `spec_list` |
-| Read spec files | `spec_read` |
-| Health + finding report | `sdd_doctor` |
+| Reopen | `spec_reopen` |
+| Hand off | `spec_handoff` |
+| Check task | `spec_task_check` |
+| Add task | `spec_task_add` |
+| Lint | `spec_lint` |
+| List / read | `spec_list` / `spec_read` |
+| Health | `sdd_doctor` |
 
-**MCP ergonomics:** `spec_claim` requires `claimer` equal to the spec **Owner** line verbatim. `spec_close` requires a non-empty `summary`; use `allow_open` when closing with deliberate unchecked rows in a phase. `spec_task_check`: prefer `dryRun: true` to preview flips.
-
-### When hand-editing IS correct
-
-- **Creating a new spec** — no `spec_create` tool. Scaffold `spec.md`, `tasks.md`, `plan.md` manually, then call `spec_claim` to stamp state and commit.
-- **Body prose edits** — acceptance criteria, plan narrative, Q-table rationale.
-- **Parking a spec** — `citadel-sdd` has no `spec_park` tool yet. To retire an idea without shipping it, move the tree to `specs/parked/<slug>/`, stamp **PARKED** + resolution in `spec.md`, and record the rationale in `specs/parked/README.md` (or the spec’s Resolution section). Prefer a conventional commit that names the superseding decision.
+Hand-edit only: new spec scaffold (then `spec_claim`), body prose, parking (`specs/parked/` + PARKED stamp).
 
 ## Test conventions
 
-- `go test -race ./...` is the canonical gate.
-- Live integration tests gate on env vars (e.g., `CITADEL_TEST_OAUTH_JWT`) and self-skip when unset — safe to run in CI.
+`go test -race ./...` / `make verify`. Live tests env-gated; safe in CI when unset.
 
-## Pre-push checklist
+## Pre-push
 
-`make verify` — vet, race tests, golangci-lint. Fix anything that fails before pushing.
+`make verify` before push.
