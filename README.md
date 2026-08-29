@@ -18,6 +18,14 @@
 
 Beyond surface-level resource management, `citadel-cli` embeds a full MCP client, making it a first-class participant in agentic workflows. Agents and LLM-powered tools can authenticate, enumerate resources, and execute operations through the same structured command surface that humans use, with machine-readable output modes and a structured error envelope designed for reliable programmatic consumption.
 
+## Quick start
+
+```bash
+go install github.com/Rethunk-Tech/citadel-cli@latest
+```
+
+Install, auth, and local development: [HUMANS.md](HUMANS.md).
+
 ## Highlights
 
 - **Repository management** — clone, push, pull, commit browsing, tree/blob traversal, topics, repo insights, deploy tokens, and webhooks
@@ -33,7 +41,7 @@ Beyond surface-level resource management, `citadel-cli` embeds a full MCP client
 ## Documentation
 
 | Document | Description |
-|---|---|
+| --- | --- |
 | [docs/cli.md](docs/cli.md) | Full command reference |
 | [HUMANS.md](HUMANS.md) | Maintainer primer — install, auth, output formats, shell completion |
 | [AGENTS.md](AGENTS.md) | Agent and LLM working conventions |
