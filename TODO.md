@@ -2,7 +2,7 @@
 
 Planning backlog only. Parked/rejected specs (`specs/parked/`) and live-smoke-only residuals stay out unless reopened by product decision.
 
-Do **not** restore `account passkey` / `account device` — removed deliberately in `b1871a6` (settings-panel, not a developer workflow). Phase B MFA recovery under that tree is obsolete with the removal.
+Do **not** restore `account passkey` / `account device` — those verbs are out of scope for this CLI (settings-panel workflows, not developer-loop). Phase B MFA recovery under that tree is not planned.
 
 ---
 
@@ -60,6 +60,6 @@ Do **not** restore `account passkey` / `account device` — removed deliberately
 | Item | Why |
 | ------ | ----- |
 | `cli-webhook-test`, billing, avatar, privacy, account-export, mcp-stdio/stream | `specs/parked/` — rejected or superseded |
-| Restoring `account *` security verbs | Deliberate removal `b1871a6` |
+| Restoring `account *` security verbs | Out of scope — browser settings-panel concern, not CLI |
 | Live-smoke / C1-only residuals on done specs | Env-gated operator work, not product features |
 | shadcn / web component work | This repo is a Go Cobra CLI; browser UX lives in Citadel web |
